@@ -6,49 +6,49 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 public class Task implements Serializable {
-    private String title;
-    private String project;
-    private boolean complete;
+    private String tastTitle;
+    private String projectTitle;
+    private boolean completeStatus;
     private LocalDate dueDate;
 
-    public Task(String title, String project, LocalDate dueDate) {
-        this.setTitle(title);
-        this.setProject(project);
-        this.complete = false;
+    public Task(String tastTitle, String projectTitle, LocalDate dueDate) {
+        this.setTastTitle(tastTitle);
+        this.setProjectTitle(projectTitle);
+        this.completeStatus = false;
         this.setDueDate(dueDate);
     }
 
-    public String getTitle() {
-        return this.title;
+    public String getTastTitle() {
+        return this.tastTitle;
     }
 
-    public void setTitle(String title) throws NullPointerException {
-        if (title.trim().equals("") || title == null) {
+    public void setTastTitle(String tastTitle) throws NullPointerException {
+        if (tastTitle.trim().equals("") || tastTitle == null) {
             throw new NullPointerException("REQUIRED: Title can not be empty.");
         }
-        this.title = title.trim();
+        this.tastTitle = tastTitle.trim();
     }
 
-    public String getProject() {
-        return this.project;
+    public String getProjectTitle() {
+        return this.projectTitle;
     }
 
-    public void setProject(String project) {
-        this.project = project.trim();
+    public void setProjectTitle(String projectTitle) {
+        this.projectTitle = projectTitle.trim();
     }
 
-    public boolean isComplete() {
-        return this.complete;
+    public boolean isCompleteStatus() {
+        return this.completeStatus;
     }
 
     public boolean markInComplete() {
-        this.complete = false;
-        return this.complete;
+        this.completeStatus = false;
+        return this.completeStatus;
     }
 
     public boolean markCompleted() {
-        this.complete = true;
-        return this.complete;
+        this.completeStatus = true;
+        return this.completeStatus;
     }
 
     public LocalDate getDueDate() {
@@ -56,7 +56,6 @@ public class Task implements Serializable {
     }
 
     public void setDueDate(LocalDate dueDate) throws DateTimeException {
-        // Throw DateTimeException if past date is given
         if (dueDate.compareTo(LocalDate.now())<0) {
             throw new DateTimeException("Past Date not allowed");
         }
@@ -67,9 +66,9 @@ public class Task implements Serializable {
 
     public String formattedStringOfTask() {
         return (
-                "\nTitle     : " + title +
-                        "\nProject   : " + project +
-                        "\nStatus    : " + (complete?"Completed":"NOT COMPLETED") +
+                "\nTitle     : " + tastTitle +
+                        "\nProject   : " + projectTitle +
+                        "\nStatus    : " + (completeStatus ?"Completed":"NOT COMPLETED") +
                         "\nDue Date  : " + dueDate +
                         "\n");
     }

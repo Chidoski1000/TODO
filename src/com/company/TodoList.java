@@ -55,14 +55,14 @@ public class TodoList {
             System.out.print(">>> Task Title  : ");
             String title = scan.nextLine();
             if (!(title.trim().equals("") || title == null)) {
-                task.setTitle(title);
+                task.setTastTitle(title);
                 isTaskUpdated = true;
             }
 
             System.out.print(">>> Project Name: ");
             String project = scan.nextLine();
             if (!(project.trim().equals("") || project == null)) {
-                task.setProject(project);
+                task.setProjectTitle(project);
                 isTaskUpdated = true;
             }
 
@@ -96,10 +96,10 @@ public class TodoList {
         taskList
                 .forEach(task -> System.out.printf((displayFormat) + "%n",
                         taskList.indexOf(task)+1,
-                        task.getTitle(),
-                        task.getProject(),
+                        task.getTastTitle(),
+                        task.getProjectTitle(),
                         task.getDueDate(),
-                        (task.isComplete()?"YES":"NO")
+                        (task.isCompleteStatus()?"YES":"NO")
                 ));
     }
 
@@ -121,11 +121,11 @@ public class TodoList {
             }
 
             taskList.stream()
-                    .sorted(Comparator.comparing(Task::getProject))
-                    .forEach(task -> System.out.printf((displayFormat) + "%n",task.getProject(),
-                            task.getTitle(),
+                    .sorted(Comparator.comparing(Task::getProjectTitle))
+                    .forEach(task -> System.out.printf((displayFormat) + "%n",task.getProjectTitle(),
+                            task.getTastTitle(),
                             task.getDueDate(),
-                            (task.isComplete()?"YES":"NO")
+                            (task.isCompleteStatus()?"YES":"NO")
                     ));
     }
 
@@ -170,13 +170,13 @@ public class TodoList {
 
     public int completedCount() {
         return (int) taskList.stream()
-                .filter(Task::isComplete)
+                .filter(Task::isCompleteStatus)
                 .count();
     }
 
     public int notCompletedCount() {
         return (int) taskList.stream()
-                .filter(task -> !task.isComplete())
+                .filter(task -> !task.isCompleteStatus())
                 .count();
     }
 
